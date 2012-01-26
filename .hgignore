@@ -1,0 +1,11 @@
+# use glob syntax.
+syntax: glob
+
+*.o
+*.exe
+*.html
+*.htm
+*.pyc
+*~
+.project
+.cdtproject
