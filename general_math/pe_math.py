@@ -51,6 +51,24 @@ def generate_list_of_primes(upper_limit):
     
     return [number for number in xrange(upper_limit) if is_prime[number]]
 
+def get_divisors(number):
+    """
+    Given a number returns all divisors of it.
+    @param number: Number to get divisors of.
+    @type: int
+    @return: List of divisors
+    @returntype: [int]
+    """
+    from math import sqrt
+
+    divisors = [number, 1]
+    limit = int(number / 2.0) + 1;
+    for i in xrange(2, limit):
+        if (number % i == 0):
+            divisors.append(i)
+    
+    return divisors;
+
 if __name__ == "__main__":
     print 'Running tests.'
     
@@ -63,7 +81,7 @@ if __name__ == "__main__":
             break
     
     if not failed:
-        print 'is_prime successfully identified the first 100 prime numbers!'
+        print '1. is_prime successfully identified the first 100 prime numbers!'
     
     # Test 2
     failed = False
@@ -74,7 +92,7 @@ if __name__ == "__main__":
         failed = True
     
     if not failed:
-        print 'generate_primes successfully generated a list equal to the first 100 primes.'
+        print '2. generate_primes successfully generated a list equal to the first 100 primes.'
     
     # Test 3
     failed = False
@@ -86,10 +104,24 @@ if __name__ == "__main__":
             break
     
     if not failed:
-        print 'is_prime successfully identified all primes up to ' + str(list_of_primes[-1])
+        print '3. is_prime successfully identified all primes up to ' + str(list_of_primes[-1])
         
     # Test 4
+    failed = False
     list_of_non_primes = [67311, 11673, 713]
     for non_prime in list_of_non_primes:
         if is_prime(non_prime):
             print 'is_prime failed to detect ' + str(non_prime) + ' as a non prime.'
+
+    if not failed:
+        print "4. is_prime didn't flag any of the chosen non primes as primes"
+
+    # Test 5
+    failed = False
+    expected_divisors = [1, 2, 3, 6]
+    for i in get_divisors(6):
+        if not i in expected_divisors:
+            print 'Failed to find all divisors of 6'
+
+    if not failed:
+        print '5. get_divisors found all divisors of 6'
