@@ -59,15 +59,7 @@ def get_divisors(number):
     @return: List of divisors
     @returntype: [int]
     """
-    from math import sqrt
-
-    divisors = [number, 1]
-    limit = int(number / 2.0) + 1;
-    for i in xrange(2, limit):
-        if (number % i == 0):
-            divisors.append(i)
-    
-    return divisors;
+    return set(reduce(list.__add__, ([i, number/i] for i in xrange(1, int(number**0.5) + 1) if number % i == 0)))
 
 if __name__ == "__main__":
     print 'Running tests.'
@@ -111,6 +103,7 @@ if __name__ == "__main__":
     list_of_non_primes = [67311, 11673, 713]
     for non_prime in list_of_non_primes:
         if is_prime(non_prime):
+            failed = True
             print 'is_prime failed to detect ' + str(non_prime) + ' as a non prime.'
 
     if not failed:
@@ -121,7 +114,19 @@ if __name__ == "__main__":
     expected_divisors = [1, 2, 3, 6]
     for i in get_divisors(6):
         if not i in expected_divisors:
+            failed = True
             print 'Failed to find all divisors of 6'
 
     if not failed:
         print '5. get_divisors found all divisors of 6'
+
+    # Test 6
+    failed = False
+    expected_divisors = [1, 3, 5, 15]
+    for i in get_divisors(15):
+        if not i in expected_divisors:
+            failed = True
+            print 'Failed to find all divisors of 15'
+
+    if not failed:
+        print '6. get_divisors found all divisors of 15'
