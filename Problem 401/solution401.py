@@ -1,22 +1,21 @@
+def get_divisors(number):
+    """
+    Given a number returns all divisors of it.
+    @param number: Number to get divisors of.
+    @type: int
+    @return: List of divisors
+    @returntype: [int]
+    """
+    return set(reduce(list.__add__, ([i, number/i] for i in xrange(1, int(number**0.5) + 1) if number % i == 0)))
+
 def sigma2(number):
 	"""
 	Returns the sum of all squared divisors of number
 	"""
-	from pe_math import get_divisors
-	sum = 0
-	for divisor in get_divisors(number):
-		sum += divisor * divisor
-
-	return sum
+	return sum([x*x for x in get_divisors(number)]) 
 
 def SIGMA2(number):
-	i = 1
-	sum = 0
-	while i <= number:
-		sum += sigma2(i)
-		i += 1
-
-	return sum
+	return sum(sigma2(i) for i in xrange(1, number + 1))
 
 if __name__ == "__main__":
 	"""
@@ -31,10 +30,11 @@ if __name__ == "__main__":
 	"""
 	import sys, time
 
-	sys.path.insert(0, "../general_math")
 	number = int(sys.argv[1])
 	start = time.time()
 	answer = SIGMA2(number)
 	end = time.time()
+
+	print "SIGMA2(" + str(number) + ") = " + str(answer)
+	print "time = " + str(end - start) + " sec."
 	
-	print answer, end - start
