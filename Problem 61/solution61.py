@@ -7,27 +7,31 @@ def main():
     heptagonal_numbers = get_list_of_numbers(MAX_NUMBER, heptagonal) # 43 numbers
     octagonal_numbers = get_list_of_numbers(MAX_NUMBER, octagonal) # 40 numbers
     for p3 in triangle_numbers:
-        for p4 in square_numbers:
-            for p5 in pentagonal_numbers:
-                for p6 in hexagonal_numbers:
-                    for p7 in heptagonal_numbers:
-                        for p8 in octagonal_numbers:
-                            if cyclic(p3, p4, p5, p6, p7, p8):
-                                return [p3, p4, p5, p6, p7, p8]
-    return [0, 0, 0, 0, 0, 0]
+        for p4 in pentagonal_numbers:
+            for p5 in square_numbers:
+                if is_cyclic([p3, p4, p5]):
+                    return [p3, p4, p5]
+    return None
 
 
-def cyclic(p3, p4, p5, p6, p7, p8):
+def is_cyclic(numbers):
     """
+    Checks if numbers in list are cyclic
+    @param numbers: List of numbers
+    @type: [int]
+    @return: True if numbers are cyclic
     """
-    cyclic = True
+    for i in range(len(numbers) - 1):
+        cyclic = (str(numbers[i])[2:] == str(numbers[i + 1])[:2])
+        if not cyclic:
+            return False
     
-    return cyclic
+    return (str(numbers[-1])[2:] == str(numbers[0])[:2])
 
 
 def get_list_of_numbers(max_number, polygonal_function):
     """
-    Generates a list of numbers up to maximum number as a polygonal series
+    Generates a list of four digit numbers up to maximum number as a polygonal series
     defined by geometric function.
     """
     n = 1
@@ -44,7 +48,7 @@ def is_four_digits(number):
     """
     Checks that the number of digits are four.
     """
-    return len(str(number)) == 4
+    return (number >= 1000) and (number <= 9999) 
 
 def triangle(n):
     return n * (n + 1) / 2
@@ -69,5 +73,5 @@ if __name__ == "__main__":
     start = time()
     numbers = main()
     end = time()
-    print 'Answer is: ' + str(numbers[0] + numbers[1] + numbers[2] + numbers[3]) + ' and it took ' + str(end - start) + 's.'
+    #print 'Answer is: ' + str(numbers[0] + numbers[1] + numbers[2] + numbers[3]) + ' and it took ' + str(end - start) + 's.'
     print 'Numbers are: ' + str(numbers)

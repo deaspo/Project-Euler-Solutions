@@ -15,7 +15,7 @@ def sigma2(number):
 	return sum([x*x for x in get_divisors(number)]) 
 
 def SIGMA2(number):
-	return sum(sigma2(i) for i in xrange(1, number + 1))
+	return sum([sigma2(i) for i in xrange(1, number + 1)])
 
 if __name__ == "__main__":
 	"""
