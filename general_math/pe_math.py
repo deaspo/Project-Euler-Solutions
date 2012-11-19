@@ -61,6 +61,24 @@ def get_divisors(number):
     """
     return set(reduce(list.__add__, ([i, number/i] for i in xrange(1, int(number**0.5) + 1) if number % i == 0)))
 
+def get_prime_factors(number):
+    """
+    Given a number returns all prime divisors of it such that the product of the divisors are number.
+    @param number: Number to get prime divisors of.
+    @type: int
+    @return: List of prime divisors
+    @returntype: [int]
+    """
+    limit = int(number**0.5) + 1
+    primes = generate_list_of_primes(limit)
+    factors = []
+    for prime in primes:
+        while number % prime == 0:
+            number /= prime;
+            factors.append(prime)
+
+    return factors
+
 if __name__ == "__main__":
     print 'Running tests.'
     
@@ -130,3 +148,29 @@ if __name__ == "__main__":
 
     if not failed:
         print '6. get_divisors found all divisors of 15'
+
+    # Test 7
+    failed = False
+    expected_factors = [5, 7, 13, 29]
+    product = 1
+    number = 13195
+    for x in get_prime_factors(number):
+        product *= x
+
+    if product != number:
+        print "Failed to get prime factors of " + str(number)
+    else:
+        print "7. Found all factors of " + str(number)
+
+    # Test 8
+    failed = False
+    expected_factors = [5, 7, 13, 29]
+    product = 1
+    number = 4000000000
+    for x in get_prime_factors(number):
+        product *= x
+
+    if product != number:
+        print "Failed to get prime factors of " + str(number)
+    else:
+        print "8. Found all factors of " + str(number)

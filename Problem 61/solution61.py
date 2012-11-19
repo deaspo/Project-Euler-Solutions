@@ -73,5 +73,6 @@ if __name__ == "__main__":
     start = time()
     numbers = main()
     end = time()
-    #print 'Answer is: ' + str(numbers[0] + numbers[1] + numbers[2] + numbers[3]) + ' and it took ' + str(end - start) + 's.'
+    #print 'Answer is: ' + str(numbers[0] + numbers[1] + numbers[2] + numbers[3])''
     print 'Numbers are: ' + str(numbers)
+    print 'Time: ' + str(end - start) + 's.'
