@@ -61,6 +61,16 @@ def get_divisors(number):
     """
     return set(reduce(list.__add__, ([i, number/i] for i in xrange(1, int(number**0.5) + 1) if number % i == 0)))
 
+def get_divisors2(number):
+    def find_factors(prime_divisors, multiplicity, current_divisor, current_result):
+        if current_divisor == len(prime_divisors):
+            return current_result
+
+        for (i in xrange(multiplicity[currentDivisor])):
+            find_factors(prime_divisors, multiplicity, current_divisor + 1, current_result)
+            current_result *= primeDivisors[currentDivisor]
+
+
 def get_prime_factors(number):
     """
     Given a number returns all prime divisors of it such that the product of the divisors are number.
