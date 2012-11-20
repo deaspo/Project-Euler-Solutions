@@ -1,16 +1,17 @@
 def main():
     MAX_NUMBER = 10000
-    triangle_numbers = get_list_of_numbers(MAX_NUMBER, triangle) # 96 numbers
-    square_numbers = get_list_of_numbers(MAX_NUMBER, square) # 68 numbers
-    pentagonal_numbers = get_list_of_numbers(MAX_NUMBER, pentagonal) # 56 numbers
-    hexagonal_numbers = get_list_of_numbers(MAX_NUMBER, hexagonal) # 48 numbers
-    heptagonal_numbers = get_list_of_numbers(MAX_NUMBER, heptagonal) # 43 numbers
-    octagonal_numbers = get_list_of_numbers(MAX_NUMBER, octagonal) # 40 numbers
-    for p3 in triangle_numbers:
-        for p4 in pentagonal_numbers:
-            for p5 in square_numbers:
-                if is_cyclic([p3, p4, p5]):
-                    return [p3, p4, p5]
+    numbers = []
+    for f in [P3, P4, P5]:
+        numbers.extend(get_list_of_numbers(MAX_NUMBER, f))
+    numbers = set(numbers)
+
+    limit = len(numbers)
+    for i in range(limit):
+        for j in range(i, limit):
+            for k in range(j, limit):
+                if isP3(i) and isP4(j) and isP5(k) and is_cyclic([i, j, k]):
+                    return [i, j, k]
+
     return None
 
 
@@ -50,23 +51,41 @@ def is_four_digits(number):
     """
     return (number >= 1000) and (number <= 9999) 
 
-def triangle(n):
+def P3(n):
     return n * (n + 1) / 2
 
-def square(n):
+def isP3(n):
+    return P3(int(n**0.5)) == n 
+
+def P4(n):
     return n * n
 
-def pentagonal(n):
+def isP4(n):
+    return P4(int(n**0.5)) == n
+
+def P5(n):
     return n * (3 * n - 1) / 2
 
-def hexagonal(n):
+def isP5(n):
+    return P5(int(n**0.5)) == n
+
+def P6(n):
     return n * (2 * n - 1)
 
-def heptagonal(n):
+def isP6(n):
+    return P6(int(n**0.5)) == n
+
+def P7(n):
     return n * (5 * n - 3) / 2
 
-def octagonal(n):
+def isP7(n):
+    return P7(int(n**0.5)) == n
+
+def P8(n):
     return n * (3 * n - 2)
+
+def isP8(n):
+    return P8(int(n**0.5)) == n
 
 if __name__ == "__main__":
     from time import time
