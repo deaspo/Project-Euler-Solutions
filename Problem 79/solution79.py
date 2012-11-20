@@ -14,19 +14,19 @@ def main():
 	start = time.time()
 	numbers = getNumbersFromFile()
 	positions = getPositions(numbers)
-	averagePositions = getAveragePosition(positions)
+	averagePositions = getAveragePositions(positions)
 	answer = "".join([k for k,v in sorted(averagePositions.iteritems(), key=operator.itemgetter(1)) if v > 0])
 	end = time.time()
 
 	print answer, end - start
 
-def getAveragePosition(positions):
-	averagePosition = {'0':0, '1':0, '2':0, '3':0, '4':0, '5':0, '6':0, '7':0, '8':0, '9':0}
+def getAveragePositions(positions):
+	averagePositions = {'0':0, '1':0, '2':0, '3':0, '4':0, '5':0, '6':0, '7':0, '8':0, '9':0}
 	for key in positions:
 		if len(positions[key]) > 0:
-			averagePosition[key] += sum(positions[key]) / float(len(positions[key]))
+			averagePositions[key] += sum(positions[key]) / float(len(positions[key]))
 
-	return averagePosition
+	return averagePositions
 
 def getPositions(numbers):
 	positions = {'0':[], '1':[], '2':[], '3':[], '4':[], '5':[], '6':[], '7':[], '8':[], '9':[]}
