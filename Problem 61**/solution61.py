@@ -9,7 +9,12 @@ def main():
     for i in range(limit):
         for j in range(i, limit):
             for k in range(j, limit):
-                if isP3(i) and isP4(j) and isP5(k) and is_cyclic([i, j, k]):
+                if is_cyclic([i, j, k]) and ((isP3(i) and isP4(j) and isP5(k)) or \
+                                             (isP3(i) and isP4(k) and isP5(j)) or \
+                                             (isP3(j) and isP4(i) and isP5(k)) or \
+                                             (isP3(j) and isP4(k) and isP5(i)) or \
+                                             (isP3(k) and isP4(i) and isP5(j)) or \
+                                             (isP3(k) and isP4(j) and isP5(i))):
                     return [i, j, k]
 
     return None
@@ -67,25 +72,25 @@ def P5(n):
     return n * (3 * n - 1) / 2
 
 def isP5(n):
-    return P5(int(n**0.5)) == n
+    return False
 
 def P6(n):
     return n * (2 * n - 1)
 
 def isP6(n):
-    return P6(int(n**0.5)) == n
+    return False
 
 def P7(n):
     return n * (5 * n - 3) / 2
 
 def isP7(n):
-    return P7(int(n**0.5)) == n
+    return False
 
 def P8(n):
     return n * (3 * n - 2)
 
 def isP8(n):
-    return P8(int(n**0.5)) == n
+    return False
 
 if __name__ == "__main__":
     from time import time
