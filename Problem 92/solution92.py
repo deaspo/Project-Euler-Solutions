@@ -4,12 +4,9 @@ def main():
 	numbers = range(1, limit)
 	for starting_number in numbers:
 		number = starting_number
-		visited_numbers = [number]
 		while number not in (1, 89):
 			number = get_next_number(number, numbers)
-			visited_numbers.append(number)
-		for visited_number in visited_numbers:
-			numbers[visited_number - 1] = number
+		numbers[starting_number - 1] = number
 		answer += number == 89
 
 	return answer
