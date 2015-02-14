@@ -1,0 +1,54 @@
+#Project Euler 99
+""" Comparing two numbers written in index form like 211 and 37 is not difficult, as any calculator would confirm
+that 211 = 2048 < 37 = 2187.
+
+However, confirming that 632382518061 > 519432525806 would be much more difficult, as both numbers contain over 
+three million digits.
+
+Using base_exp.txt (right click and 'Save Link/Target As...'), a 22K text file containing one thousand lines with 
+a base/exponent pair on each line, determine which line number has the greatest numerical value.
+
+NOTE: The first two lines in the file represent the numbers in the example given above. """
+###########################################################################################################
+#Loaded the needed modules
+import numpy as np
+import pandas as pd
+#####Load the base_exp.txt
+data=open('p099_base_exp.txt', 'r')#load the data into the memory
+# Lists to old the data
+base=[]
+expo=[]
+res=[]
+bases=[]
+expons=[]
+###########################################################################
+for line in data:
+    temp=line.split(',')
+    try:
+        a=np.log(float(temp[0]))
+        b=float(temp[1])
+        c=a*b
+        da=float(temp[0])
+        da2=float(temp[1])
+        base.append(a)
+        expo.append(b)
+        res.append(c)
+        bases.append(da)
+        expons.append(da2)
+    except:
+        print ('Tossing line'), line
+##########################################################################
+# creates a dictionary and dataframe to hold the data
+dic={'Base':bases,'Products':res,'Exponetials':expons}
+dataframe=pd.DataFrame(dic)
+#checks the maximum
+maximum=np.max(np.array(res))
+#view the dataframe
+dataframe.head()
+#create a filter that filters the dataframe and returns max.
+data2=dataframe[dataframe.Products==dataframe.Products.max()]
+#view the dataframe having the maximum
+data2
+####################################################checks if maximum evaluated above
+data2==maximum
+############################################Thanks####################
