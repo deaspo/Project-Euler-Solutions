@@ -1,0 +1,9 @@
+#Distinct Powers
+#######################################
+import pandas as pd
+import math as m
+##############################
+c=pd.DataFrame({'power':[m.pow(a,b) for a in range(2,101) for b in range(2,101)]})
+d=c.power.drop_duplicates()
+d.count()
+################################Thanks######
