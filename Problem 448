@@ -1,0 +1,18 @@
+#Problem 448 Average least common multiple
+#comment: Run this code in 64 bit version of python v3+!!
+def a(n):
+    a=[]
+    for i in range(1,n+1):
+        a.append(lcm(n,i))
+    return sum(a)/len(a)
+	
+def s(n):
+    s=[]
+    for k in range(1,n+1):
+        s.append(a(k))
+    return sum(s)%999999017
+if __name__== '__main__':
+    print(s(99999999019))
+  
+#The running time might quite be disappointing because of the for loops in the code but am hoping to improving in future.
+######################################### Thanks ####################################
